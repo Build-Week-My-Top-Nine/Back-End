@@ -1,0 +1,22 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "My top nine web app backend data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Build-Week-My-Top-Nine/Back-End.git"
+  },
+  "keywords": [
+    "[]"
+  ],
+  "author": "Teddy-zenebe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Build-Week-My-Top-Nine/Back-End/issues"
+  },
+  "homepage": "https://github.com/Build-Week-My-Top-Nine/Back-End#readme"
+}
