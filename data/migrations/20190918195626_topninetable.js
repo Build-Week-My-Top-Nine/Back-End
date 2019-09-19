@@ -4,7 +4,7 @@ exports.up = function(knex) {
         col.increments();
         col.string('UserName', 255).notNullable();
         col.integer('Rank').notNullable();
-        col.string('TopNine', 255).notNullable();
+        col.string('TopNineItem', 255).notNullable();
         col.string('Category', 255).notNullable();
       });
 };
