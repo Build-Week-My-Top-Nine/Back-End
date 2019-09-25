@@ -5,6 +5,8 @@ module.exports = {
     find,
     findBy,
     findById,
+    remove,
+    update
   };
   
   function find() {
@@ -25,4 +27,16 @@ module.exports = {
     return db('mytopnine')
       .where({ id })
       .first();
+  }
+
+  function remove(id){
+    return db('mytopnine')
+    .where('id', id)
+    .del();
+  }
+
+  function update(id, changes) {
+    return db('mytopnine')
+      .where({ id })
+      .update(changes);
   }
