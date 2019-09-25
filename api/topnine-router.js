@@ -31,4 +31,50 @@ router.post('/', async(req, res)=>{
     }
 })
 
+router.delete('/:id', validateUserId, (req, res) => {
+    const id = req.params.id
+        db.remove(id)
+            .then(deleted => res.status(200).json(deleted))
+            .catch(error => {
+                    console.log(error)
+                    res.status(500).json({ message: 'One of your top nine item could not be removed' })
+            })
+
+});
+
+router.put('/:id', validateUserId, (req, res) => {
+    const id = req.params.id
+    const change = req.body
+        db.update(id, change)
+            .then(updated => res.status(201).json(updated))
+            .catch(error => {
+                    console.log(error)
+                    res.status(500).json({ message: 'The user information could not be modified.' })
+            })
+
+});
+
+
+//custom middleware
+
+function validateUserId(req, res, next) {
+    const id = req.params.id
+       db.findById(id)
+            .then(user => {
+                    if (user) {
+                            req.use = user
+                            next()
+
+                    } else {
+                            res.status(400).json({ message: "invalid user id" })
+                    }
+            })
+            .catch(error => {
+                    console.log(error)
+                    res.status(500).json({ message: 'Error processing request' })
+            })
+
+
+};
+
 module.exports = router
