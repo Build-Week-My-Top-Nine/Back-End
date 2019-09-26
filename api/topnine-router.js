@@ -33,6 +33,7 @@ router.post('/', async(req, res)=>{
 
 router.delete('/:id', validateUserId, (req, res) => {
     const id = req.params.id
+    
         db.remove(id)
             .then(deleted => res.status(200).json(deleted))
             .catch(error => {
