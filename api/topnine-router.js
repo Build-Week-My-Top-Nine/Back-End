@@ -1,8 +1,11 @@
 const router = require('express').Router();
 const db = require('../data/topnine-model.js')
+const restriction = require('./restriction-auth.js')
 
-router.get('/', (req, res)=>{
-    db.find()
+router.get('/',restriction, (req, res)=>{
+    console.log(req.decodedToken)
+    const user = req.decodedToken.username
+    db.findBy({username:user})
     .then(topnines=>{
         res.status(200).json(topnines)
     })
