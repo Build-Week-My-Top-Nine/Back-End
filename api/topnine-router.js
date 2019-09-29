@@ -3,7 +3,6 @@ const db = require('../data/topnine-model.js')
 const restriction = require('./restriction-auth.js')
 
 router.get('/',restriction, (req, res)=>{
-    console.log(req.decodedToken)
     const user = req.decodedToken.username
     db.findBy({username:user})
     .then(topnines=>{
@@ -59,7 +58,7 @@ router.put('/:id', validateUserId, (req, res) => {
 });
 
 
-//custom middleware
+// middleware
 
 function validateUserId(req, res, next) {
     const id = req.params.id
