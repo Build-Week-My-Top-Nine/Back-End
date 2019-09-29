@@ -1,10 +1,11 @@
 # Back-End
-api/auth/login POST
-Expects an object with this format as the request body:
 
+# api/auth/login POST
+
+Expects an object with this format as the request body:
 {
   "username": "Sam",   //string
-  "password": "password" //string
+  "password": "2563tf@aS" //string
 }
 If the username doesn't exist in the users table or the password doesn't match, it will reject the request with a 401 HTTP status.
 
@@ -17,12 +18,13 @@ If successful, it will return with a 201 HTTP status and an object with this for
 token: A JSON Web Token
 
 
-api/auth/register POST
+# api/auth/register POST
+
 Expects an object with this format as the request body:
 
 {
-  "username": "User1",    // required/string/unique
-  "password": "password", // required/string
+  "username": "Sam",    // required/string/unique
+  "password": "25FGT@rt", // required/string
 }
 If any of the required fields are missing, it will reject the request with a 400 HTTP status.
 
@@ -33,11 +35,12 @@ If successful, it will return with a 201 HTTP status and an object with this for
     "username": "Sam",
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjozLCJ1c2VybmFtZSI6IlNhbSIsImlhdCI6MTU2OTU0OTAyMiwiZXhwIjoxNTY5NjM1NDIyfQ.uYTDE-A9Xz4vYko-H4GnfJwMrY-hkVCJGrt3dhACwrQ"
 }
+token: A JSON Web Token
 
 
-
-/api/topnine GET
-Used to populate all top nine products. If no top nine exist in the database, it will reject the request with a 404 HTTP status.
+# /api/topnine GET
+Requires an authorization header with a JWT otherwise reject the request with a 401 HTTP status.
+Used to populate all top nine products for the loged in user. If there is error on retriving the data, it will reject the request with a 500 HTTP status.
 
 If successful, it will return a 200 HTTP status and an array of objects. 
 
@@ -65,8 +68,65 @@ If successful, it will return a 200 HTTP status and an array of objects.
     },
     
 ]
-id: An integer representing the ID of the the user 
 
+# /api/topnine POST
+
+Expects an object with this format as the request body:
+
+{
+        "Rank": 1,              required/int
+        "TopNineItem": "Banana",required/string/
+        "Category": "Fruit"     required/string/
+}
+Requires an authorization header with a JWT
+Used to add top nine products for the loged in user. If there is missed data or the top nine rank is already exist or the rank is greater than 9 or less than 1, it will reject the request with a 400 HTTP status.
+
+If successful, it will return a 200 HTTP status and the added objects. 
+
+   {
+        "id": 1,
+        "UserName": "Sam",
+        "Rank": 1,
+        "TopNineItem": "Banana",
+        "Category": "Fruit"
+    },
+
+# /api/topnine PUT
+
+Expects an object with this format as the request body:
+
+{
+        "UserName": "Sam",      required/string/optional
+        "Rank": 1,              required/int/optional
+        "TopNineItem": "Banana",required/string/optional 
+        "Category": "Fruit"     required/string/optional
+}
+
+Requires an authorization header with a JWT or it will reject the request with a 403 HTTP status. If no user ID exists in the database with the ID specified in the path, it will reject the request with a 400 HTTP status. 
+
+If successful, it will return a 200 HTTP status and the added objects. 
+
+   {
+        "id": 1,
+        "UserName": "Sam",
+        "Rank": 1,
+        "TopNineItem": "Banana",
+        "Category": "Fruit"
+    },
+
+# /api/topnine DELETE
+
+Requires an authorization header with a JWT or it will reject the request with a 403 HTTP status. If no user ID exists in the database with the ID specified in the path, it will reject the request with a 400 HTTP status. 
+
+If successful, it will return a 200 HTTP status and the added objects. 
+
+   {
+        "id": 1,
+        "UserName": "Sam",
+        "Rank": 1,
+        "TopNineItem": "Banana",
+        "Category": "Fruit"
+    },
 
 
 Tables -1
