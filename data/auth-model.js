@@ -1,23 +1,23 @@
 const db = require('./dbConfig.js')
 
 module.exports = {
-    register,
-    login,
-    findByregisterId
-  };
+  register,
+  login,
+  findByregisterId
+};
 
-  async function register(user) {
-    const [id] = await db('mytopnineusers').insert(user);
-  
-    return findByregisterId(id);
-  }
+async function register(user) {
+  const [id] = await db('mytopnineusers').insert(user);
 
-  function login(username){
-    return db('mytopnineusers').where({username})
-  }
+  return findByregisterId(id);
+}
 
-  function findByregisterId(id) {
-    return db('mytopnineusers')
-      .where({ id })
-      .first();
-  }
+function login(username) {
+  return db('mytopnineusers').where({ username })
+}
+
+function findByregisterId(id) {
+  return db('mytopnineusers')
+    .where({ id })
+    .first();
+}
